@@ -1,0 +1,23 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <div>
+        <div>
+            <h1 class="display-4">Welcome</h1>
+            <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        </div>
+        <div>
+            <div data-component="HelloApi" data-props="{ value:'razor' }"></div>
+        </div>
+    </div>
+
+    <div class="my-5">
+        <div class="d-flex justify-content-evenly">
+            <div data-component="pages/GettingStarted.mjs" data-props="{ template:'razor' }"></div>
+        </div>
+    </div>
+</div>
