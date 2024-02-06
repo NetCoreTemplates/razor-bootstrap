@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MyApp.ServiceInterface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -68,9 +69,20 @@ services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
-// Add application services.
-services.AddTransient<IEmailSender, EmailSender>();
+services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
+// Uncomment to send emails with SMTP, configure SMTP with "SmtpConfig" in appsettings.json
+//services.AddSingleton<IEmailSender<ApplicationUser>, EmailSender>();
 services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, AdditionalUserClaimsPrincipalFactory>();
+
+services.AddEndpointsApiExplorer();
+services.AddSwaggerGen();
+
+// Register all services
+services.AddServiceStack(typeof(MyServices).Assembly, c => {
+    c.AddSwagger(o => {
+        o.AddBasicAuth();
+    });
+});
 
 var app = builder.Build();
 
@@ -91,8 +103,10 @@ app.UseCookiePolicy();
 
 app.UseAuthorization();
 
-app.UseServiceStack(new AppHost());
-
 app.MapRazorPages();
+
+app.UseServiceStack(new AppHost(), options => {
+    options.MapEndpoints();
+});
 
 app.Run();

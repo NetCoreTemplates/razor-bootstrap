@@ -1,4 +1,3 @@
-using ServiceStack;
 using ServiceStack.Data;
 using ServiceStack.OrmLite;
 
@@ -14,9 +13,8 @@ public class ConfigureDb : IHostingStartup
                 context.Configuration.GetConnectionString("DefaultConnection")
                 ?? ":memory:",
                 SqliteDialect.Provider));
-        })
-        .ConfigureAppHost(appHost => {
+
             // Enable built-in Database Admin UI at /admin-ui/database
-            appHost.Plugins.Add(new AdminDatabaseFeature());
+            services.AddPlugin(new AdminDatabaseFeature());
         });
 }
