@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MyApp.Areas.Identity.Pages.Account;
 using MyApp.ServiceInterface;
 
 var builder = WebApplication.CreateBuilder(args);
