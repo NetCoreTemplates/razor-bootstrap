@@ -13,3 +13,4 @@ npx create-net razor-bootstrap ProjectName
 ## Jumpstart with Copilot
 
 Instantly [scaffold a new App with this template](https://github.com/new?template_name=razor-bootstrap&template_owner=NetCoreTemplates) using GitHub Copilot, just describe the features you want and watch Copilot build it!
+
